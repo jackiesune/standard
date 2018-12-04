@@ -1,12 +1,16 @@
 #main.py
-import http.cookiejar
-from urllib.request import HTTPCookieProcessor,build_opener
+#import http.cookiejar
+#from urllib.request import HTTPCookieProcessor,build_opener
 #import urllib.request
-url="http://python.org"
+import http.cookiejar,urllib.request
+from urllib.request import HTTPCookieProcessor,build_opener
+
+
+url="http://www.baidu.com"
 def not_file():
     cookie=http.cookiejar.CookieJar()
-    handler=HTTPCookieProcessor(cookie)
-    opener=build_opener(handler)
+    handler=urllib.request.HTTPCookieProcessor(cookie)
+    opener=urllib.request.build_opener(handler)
     response=opener.open(url)
     for item in cookie:
         print(item.name+':'+item.value)
@@ -16,18 +20,18 @@ def mozilla_cookie():
     filename='cookieMozilla'
     cookie=http.cookiejar.MozillaCookieJar(filename)
     handler=HTTPCookieProcessor(cookie)
-    opener=build_open(handler)
+    opener=build_opener(handler)
     response=opener.open(url)
-    cookie.save(ignore_discard=True,ignore_expirs=True)
+    cookie.save(ignore_discard=True,ignore_expires=True)
 
 
 def LWP_cookie():
     filename='cookieLWP'
     cookie=http.cookiejar.LWPCookieJar(filename)
     handler=HTTPCookieProcessor(cookie)
-    opener=build_open(handler)
+    opener=build_opener(handler)
     response=opener.open(url)
-    cookie.save(ignore_discard=True,ignore_expirs=True)
+    cookie.save(ignore_discard=True,ignore_expires=True)
 
 
 
@@ -36,7 +40,7 @@ def load_LWP_cookie():
     cookie=http.cookiejar.CookieJar()
     cookie.load(filename,ignore_discard=True,ignore_expires=True)
     handler=HTTPCookieProcessor(cookie)
-    opener=build_open(handler)
+    opener=build_opener(handler)
     response=opener.open(url)
     print(response.read().decode('utf8'))
 
