@@ -21,6 +21,7 @@ html=response.read().decode('utf8')
 choose='''<body>.*?<.*?wrapper.*?>.*?content.*?>.*?<.*?list-wp.*?>.*?<.*?slider-wrapper.*?>.*?slide-page.*?data-index="(/d)">.*?<p>(.*?).*?<strong>(.*?)</strong>'''
 pattern=re.compile(choose)
 results=re.findall(pattern,html)
+print(results,'meiyou')
 for result in results:
     print(result)
 
