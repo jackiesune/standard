@@ -17,11 +17,12 @@ req=urllib.request.Request(url=url,headers=headers)
 response=urllib.request.urlopen(req)
 print(response.status)
 html=response.read().decode('utf8')
-print(html)
+#print(html)
 choose='''<body>.*?<.*?wrapper.*?>.*?content.*?>.*?<.*?list-wp.*?>.*?<.*?slider-wrapper.*?>.*?slide-page.*?data-index="(/d)">.*?<p>(.*?).*?<strong>(.*?)</strong>'''
 pattern=re.compile(choose)
 results=re.findall(pattern,html)
-
+for result in results:
+    print(result)
 
 
 
