@@ -1,16 +1,24 @@
-#main.py
-
-import urllib.request
-import urllib.parse
+from urllib.request  import HTTPPasswordMgrWithDefaultRealm,HTTPBasicAuthHandler,build_opener
 import urllib.error
 
 
-#urlopen(url,data,timeout...)
-#Request(url,data,headers,method...)
-url="http://python.org"
-headers={
-    "User-Agent":""
-}
-req=urllib.request.Request(url=url,headers=headers)
-response=urllib.request.urlopen(req)
-print(response.status)
+
+user="username"
+password="password"
+url="http://localhost:5000"
+
+p=HTTPPasswordMgrWithDefaultRealm()
+p.add_password(None,url,user,password)
+handler=HTTPBasicAuthHandler(p)
+opener=bulid_opener(handler)
+
+try:
+    response=opener.open(url)
+    print(response.read().decode('utf8')
+except urllib.error.URLError as e:
+          print(e.reason)
+
+
+
+
+
